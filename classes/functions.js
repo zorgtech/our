@@ -36,7 +36,7 @@ function die(){
   text: "You died.",
   type: "warning",
   showCancelButton: false,
-  confirmButtonColor: "#DD6B55",
+  confirmButtonColor: "#08CE08",
   confirmButtonText: "Restart",
   closeOnConfirm: true
 },
@@ -57,7 +57,7 @@ function start(){
         title: "Starting Game!",
         text: "Click to start game",
         showCancelButton: false,
-        confirmButtonColor: "#DD6B55",
+        confirmButtonColor: "#08CE08",
         confirmButtonText: "START!",
         closeOnConfirm: true
         },
