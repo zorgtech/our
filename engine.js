@@ -3,6 +3,7 @@ ctx = canvas.getContext("2d"),
 width = 400,
 height = 400,
 keys={},
+kills=0,
 enemys=[],
 bullets=[],
 framerate=25,
@@ -35,6 +36,11 @@ game = setInterval(function(){
             bullets[i].draw();
         } catch(err){}
     }
+    
+    if (getRandomInt(0,50-(kills/2))===0){
+        spawnEnemy(getRandomInt(0,width-blankenemy.width),getRandomInt(0,height/4));    
+    }
+    
 }, 1000/framerate);
 
 document.body.addEventListener("keydown", function (e) {

@@ -1,4 +1,4 @@
-function Enemy(x,y,id,speed,health) {
+function Enemy(x,y,id,speed,health,movePattern) {
     this.x=x;
     this.y=y;
     this.id=id;
@@ -8,28 +8,31 @@ function Enemy(x,y,id,speed,health) {
     this.textColor="black";
     this.speed=speed;
     this.downAnimation={active:false,distance:0};
+    this.moveData={};
     this.lowest=100;
     this.health=health;
     this.bulletSpeed=getRandomArbitrary(5,8);
     this.bDamage=2;
+    this.move=movePattern;
     
     this.checkWall = function(){
         if (this.x+this.width==width||this.x+this.width>=width){
-            this.downAnimation.active=true;
-            //this.y+=this.width+(this.width/5);
-            this.speed*=-1;
-            return true;
+            return "right";
         }
         if (this.x==0||this.x<=0){
-            this.downAnimation.active=true;
-            this.speed*=-1;
-            return true;
+            return "left";
+        }
+        if (this.y==0||this.y<=0){
+            return "up";
+        }
+        if (this.y==height||this.y<=height){
+            return "down";
         }
         return false;
     }
     
     this.shoot=function(){
-        if (getRandomInt(0,reindexArray(enemys).length*5)==0){
+        if (getRandomInt(0,(this.speed*15)-kills).clamp(0,10000000000)==0){
             if (player.y < this.y){
                 var bSpeed = this.bulletSpeed;
             } else {
@@ -41,21 +44,7 @@ function Enemy(x,y,id,speed,health) {
     
     this.delete = function(){
         delete window["enemys"][this.id];
-    }
-    
-    this.move = function(){
-        if (!this.downAnimation.active){
-            this.checkWall();
-            this.x+=this.speed;
-        } else {
-            if (this.downAnimation.distance < this.width+(this.width/5)){
-                this.y+=Math.abs(this.speed);
-                this.downAnimation.distance+=Math.abs(this.speed);
-            } else {
-                this.downAnimation.active=false;
-                this.downAnimation.distance=0;
-            }
-        }
+        kills++;
     }
     
     this.draw=function(){
