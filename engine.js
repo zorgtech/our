@@ -12,11 +12,6 @@ player=new Player(width/2-25,400-25),
 healthbar=new healthBar(0,0,100,20);
 var game;
 
-cheet('↑ ↑ ↓ ↓ ← → ← → b a', function () {
-  player.bulletCoolDownLength=0;
-  player.health=30;
-});
-
 start();
 
 doWave(0);
